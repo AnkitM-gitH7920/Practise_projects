@@ -2,18 +2,58 @@ import "./Home.css";
 import "../../css/utilityClasses.css";
 
 import Arrow from "../Arrow/Arrow.jsx";
-import homeSvgAssetsObject from "./home.svgAssetsExporter.jsx";
 import GroceryTile from "../GroceryTile/GroceryTile.jsx";
 import RestaurantCard from "../RestaurantCard/RestaurantCard.jsx";
+import homeSvgAssetsObject from "./home.svgAssetsExporter.jsx";
 
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
+
+
+// Todoes ->
+/*
+1. create this restaurant register page ,but first finish the home page design
+*/
 
 function Home() {
     // global variables
     const foodItemPathPrefix = "/homePageAssets/foodItems";
     const groceryTilePathPrefix = "/homePageAssets/groceryTileImages";
 
+    const foodItemScrollDivRef = useRef(null)
+    const groceriesScrollDivRef = useRef(null);
+
+    scrollDivRef.current.scrollBy({
+        left: -300,
+        behavior: "smooth"
+    });  //example code for scrolling
+    
+    const moveLeft = () => {
+        if (groceriesScrollDivRef.current) {
+            groceriesScrollDivRef.current.scrollBy({
+                left: -300,
+                behavior: "smooth"
+            });
+        }
+        if (foodItemScrollDivRef.current) {
+            foodItemScrollDivRef.current.scrollBy({
+                left: -300,
+                behavior: "smooth"
+            });
+        }
+    }
+    const moveRight = () => {
+        if (groceriesScrollDivRef.current) {
+            groceriesScrollDivRef.current.scrollBy({
+                left: 300,
+                behavior: "smooth"
+            });
+        }
+        if (foodItemScrollDivRef.current) {
+
+        }
+    }
     return (
         <>
             <HelmetProvider>
@@ -82,12 +122,12 @@ function Home() {
                                 <header className="align-center">
                                     <p>Order our best food options</p>
                                     <div className="right-left-navigation align-center">
-                                        <button className="arrow-left center"><Arrow /></button>
-                                        <button className="arrow-right center"><Arrow /></button>
+                                        <button onClick={moveLeft} className="arrow-left center"><Arrow /></button>
+                                        <button onClick={moveRight} className="arrow-right center"><Arrow /></button>
                                     </div>
                                 </header>
                                 <main>
-                                    <div className="foodItemsCont">
+                                    <div ref={foodItemScrollDivRef} className="foodItemsCont">
                                         <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/bhature.png`} alt="Loading..." /></Link>
                                         <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/biryani.png`} alt="Loading..." /></Link>
                                         <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/burger.png`} alt="Loading..." /></Link>
@@ -116,11 +156,11 @@ function Home() {
                             <header className="align-center">
                                 <p>Shop groceries on Instamart</p>
                                 <div className="right-left-navigation align-center">
-                                    <button className="arrow-left center"><Arrow /></button>
-                                    <button className="arrow-right center"><Arrow /></button>
+                                    <button onClick={moveLeft} className="arrow-left center"><Arrow /></button>
+                                    <button onClick={moveRight} className="arrow-right center"><Arrow /></button>
                                 </div>
                             </header>
-                            <main className="flex">
+                            <main ref={groceriesScrollDivRef} className="flex">
                                 <GroceryTile groceryTileName="Fresh Vegetables" groceryTileSrc={`${groceryTilePathPrefix}/grocery101.png`} />
                                 <GroceryTile groceryTileName="Fresh Fruits" groceryTileSrc={`${groceryTilePathPrefix}/grocery102.png`} />
                                 <GroceryTile groceryTileName="Dairy, Bread and Eggs" groceryTileSrc={`${groceryTilePathPrefix}/grocery103.png`} />

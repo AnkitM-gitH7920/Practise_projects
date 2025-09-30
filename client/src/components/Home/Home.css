@@ -172,6 +172,7 @@
     transform: rotate(180deg);
 }
 .foodItemsCont{
+    scroll-behavior: smooth;
     overflow: hidden hidden;
     margin-top: 20px;
     padding: 20px 20px 120px 20px;
@@ -201,6 +202,7 @@
     font-weight: 700;
 }
 .groceryDisplay main{
+    scroll-behavior: smooth;
     overflow: hidden hidden;
     gap: 35px;
     width: 80%;
@@ -222,5 +224,6 @@
     font-weight: 700;
 }
 .restaurantDisplay main{
+    scroll-behavior: smooth;
     width: 80%;
 }
