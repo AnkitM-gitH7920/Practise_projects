@@ -13,7 +13,11 @@ pnpm-debug.log*
 
 # dependencies
 /client/node_modules
+/client/yarn.lock
+/client/vite.config.js
+/client/eslint.config.js
 /server/node_modules
+/server/yarn.lock
 
 # Build outputs
 dist/
