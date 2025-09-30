@@ -1,0 +1,1 @@
+1. convert the shop now button on the very top, into a page Link after creating ths Shop now page

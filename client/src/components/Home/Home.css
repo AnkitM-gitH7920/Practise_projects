@@ -1,0 +1,226 @@
+:root{
+    --home-orange-1: #ff5200;
+}
+.homeHeaderCont{
+    background-color: var(--home-orange-1);
+    padding: 30px 125px;
+    justify-content: space-between;
+}
+.homeLogo-white img{
+    object-fit: contain;
+    width: 9rem;
+}
+.homeNavButtons{
+    gap: 30px;
+}
+.homeNavButtons li a{
+    text-decoration: none;
+    color: white;
+    font-family: poppins;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+.homeNavButtons li:nth-child(3){
+    border: 1px solid white;
+    padding: 13px 18px;
+    border-radius: 12px;
+}
+.gotoIcon{
+    margin-left: 10px;
+    transform: rotate(-45deg);
+}
+.homeNavButtons li:nth-child(4){
+    background-color: black;
+    padding: 15px 35px;
+    border-radius: 12px;
+}
+
+/* main landing interface designs */
+.mainLandingInterfaceDiv{
+    padding: 60px 0px 20px 0px;
+    position: relative;
+    background-color: var(--home-orange-1);
+    width: 100%;
+}
+.landingHeading{
+    line-height: 50px;
+    font-size: 2.5rem;
+    font-family: "poppins";
+    font-weight: 600;
+    text-align: center;
+    width: 60%;
+    color: white;
+}
+.locationAndRestaurantSearch{
+    width: 58%;
+    gap: 7px;
+    margin-top: 20px;
+}
+.locationSearch,
+.restaurantSearch{
+    position: relative;
+    /* margin: 0px 30px; */
+}
+.locationSearch>input,
+.restaurantSearch>input{
+    font-family: "poppins";
+    font-weight: 600;
+    outline: none;
+    padding: 15px 10px 15px 20px;
+    border-radius: 12px;
+    border: 1px solid #aaa;
+    font-size: 0.88rem;
+    caret-color: var(--home-orange-1);
+    color: #6d6d6e;
+    width: 100%;
+}
+.locationSearch>input{
+    padding: 15px 40px 15px 40px;
+}
+.restaurantSearch>input{
+    padding: 15px 10px 15px 20px;
+}
+.locationSearch{
+    width: 85%;
+}
+.restaurantSearch{
+    width: 130%;
+}
+.locationSearch>input::placeholder,
+.restaurantSearch>input::placeholder{
+    color: #aaa;
+}
+.orangeLocationSymbol,
+.chevron,
+.homeSearchIcon{
+    position: absolute;
+}
+.orangeLocationSymbol{
+    left: 10px;
+}
+.chevron{
+    right: 12px;
+    bottom: 15px;
+    height: 18px;
+    width: 18px;
+    transform: rotate(180deg);
+    cursor: pointer;
+}
+.homeSearchIcon{
+    right: 15px;
+}
+
+/* location dropdown positioning and designs */
+/* .locationDropDown{
+
+} <-- PENDIND*/
+
+
+/* positions and resizing redirecting cards */
+.redirectingCardImageContainer{
+    margin: 25px 0px 0px 0px;
+}
+.redirectingCardImageContainer a img{
+    object-fit: contain;
+    height: 19rem;
+
+}
+/* positioning side decorative images */
+.veggiesImage,
+.sushiesImage{
+    position: absolute;
+    object-fit: contain;
+    height: 29rem;
+    top: -30px;
+}
+.veggiesImage{
+    left: 0px;
+}
+.sushiesImage{
+    right: 0px;
+}
+
+/* food items display container designs */
+.foodItemsDisplay{
+    padding: 90px 0px 0px 0px;
+    width: 100%;
+}
+.foodItemsDiv{
+    width: 80%;
+}
+.foodItemsDiv header{
+    justify-content: space-between;
+    font-family: "poppins";
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+.right-left-navigation{
+    gap: 10px;
+}
+.arrow-left,
+.arrow-right{
+    border: none;
+    outline: none;
+    background-color: white;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: rgba(2, 6, 12, 0.15);
+    cursor: pointer;
+}
+.arrow-left{
+    transform: rotate(180deg);
+}
+.foodItemsCont{
+    overflow: hidden hidden;
+    margin-top: 20px;
+    padding: 20px 20px 120px 20px;
+    border-radius: 12px;
+    gap: 90px;
+    display: grid;
+    grid-template-columns: 90px 90px 90px 90px 90px 90px 90px 90px 90px 90px;
+    grid-template-rows: 90px 90px;
+}
+.foodItemsCont img{ /* food item image sizing */
+    object-fit: contain;
+    height: 11rem;
+}
+
+/* grocery tiles display : STATUS  => pending */
+.groceryDisplay{
+    padding: 80px 0px 0px 0px;
+    width: 100%;
+}
+.groceryDisplay header{
+    width: 80%;
+    justify-content: space-between;
+}
+.groceryDisplay header p{
+    font-family: "poppins";
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+.groceryDisplay main{
+    overflow: hidden hidden;
+    gap: 35px;
+    width: 80%;
+    padding: 30px 0px;
+}
+
+/* restaurant card display */
+.restaurantDisplay{
+    padding: 80px 0px 0px 0px;
+    width: 100%;
+}
+.restaurantDisplay header{
+    width: 80%;
+    justify-content: space-between;
+}
+.restaurantDisplay header p{
+    font-family: "poppins";
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+.restaurantDisplay main{
+    width: 80%;
+}

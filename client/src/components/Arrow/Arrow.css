@@ -1,0 +1,33 @@
+.arrow{
+    position: relative;
+    height: 2px;
+    width: 12px;
+    background-color: black;
+    border-radius: 90px;
+}
+.arrow::before{
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    height: 2px;
+    width: 8px;
+    border-radius: 90px;
+    transform: rotate(-45deg);
+    background-color: black;
+}
+.arrow::after{
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: -2px;
+    height: 2px;
+    width: 8px;
+    border-radius: 90px;
+    transform: rotate(45deg);
+    background-color: black;
+}
+.arrowCont{
+    height: 20px;
+    width: 20px;
+}
