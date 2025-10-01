@@ -1,26 +1,63 @@
 import "./RestaurantCard.css";
-import "../../css/utilityClasses.css"
+import "../../css/utilityClasses.css";
+import homeSvgAssetsObject from "../Home/home.svgAssetsExporter.jsx";
 
 // props:-
-
-//first create this card and load these images using backend api call, retreiving all the images from cloudinary and retreiving the restaurants details from database, then loading them dynamically using map() method
-/*
-1. image url
-2. Restaurant name
-3. rating
-4. origin and typeof food offered
-5. Address
-6. Distance from user
-7. Type of booking
-8. Discount - pre_booking
-9. Discount - with bank offers
-*/
-
-function RestaurantCard(){
-    return(
+// restaurantImageURL = "" done
+// restaurantName = "" done
+// rating = "" done
+// price = "" done
+// origin = "" done
+// foodType = "" done
+// Address = ""
+// distanceFromUser = ""
+// facilities = "" -> type:- table booking, free drink
+// preBookingDiscount
+// bankOfferDiscount = ""
+function RestaurantCard(props) {
+    return (
         <div className="restaurantCardBody">
             <div className="restaurantImage">
-                <img src="/" alt="" />
+                <img src={props.restaurantImageURL} alt="Loading..." />
+                <div className="name-rating align-center">
+                    {/* @rest :- restaurant */}
+                    <p className="rest-name">
+                        {props.restaurantName}
+                    </p>
+                    <p className="align-center">
+                        {homeSvgAssetsObject.ratingStarIcon}
+                        <span className="rest-rating">{props.rating}</span>
+                    </p>
+                </div>
+            </div>
+            <div className="restaurantInfo">
+                <div className="origin-price align-center">
+                    <p className="rest-origin"><span>{props.origin}</span> • <span>{props.foodType}</span></p>
+                    <p className="rest-price"><span>{props.price}</span></p>
+                </div>
+                <div className="address-distance align-center">
+                    <p className="rest-address">{props.address}</p>
+                    <p className="rest-distance">{props.distanceFromUser}</p>
+                </div>
+                <div className="facilities align-center">
+                    <div style={{display: props.tableBooking ? "flex" : "none"}} className="facility align-center">
+                        <img src="/homePageAssets/book.png" alt="Loading..." />
+                        <p className="facilityName">Table booking</p>
+                    </div>
+                    <div style={{display: props.freeDrink ? "flex" : "none"}} className="facility align-center">
+                        <img src="/homePageAssets/drink2.png" alt="Loading..." />
+                        <p className="facilityName">Free drink</p>
+                    </div>
+                </div>
+                <div style={{display: ""}} className="discount-preBooking align-center">
+                    {/* pending */}
+                    <img src="/homePageAssets/OFFER.png" alt="Loading" />
+                    <p style={{display : props.isPreBookingDiscountIncluded ? "flex" : "none"}} className="discountInfo">Flat {props.preBookingDiscount}% off on pre-booking</p>
+                    {/* not including the more discounts display */}
+                </div>
+                <div className="bankOfferDiscount">
+                    <p>Up to 10% off with bank offers</p> 
+                </div>
             </div>
         </div>
     )

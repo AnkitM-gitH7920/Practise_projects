@@ -20,40 +20,56 @@ function Home() {
     // global variables
     const foodItemPathPrefix = "/homePageAssets/foodItems";
     const groceryTilePathPrefix = "/homePageAssets/groceryTileImages";
+    const restaurantImagePathPrefix = "/homePageAssets/restaurants"
 
-    const foodItemScrollDivRef = useRef(null)
+    //Div references
+    // const 
+    const sidebarDivRef = useRef(null);
+    const getAppDivRef = useRef(null);
+    const foodItemScrollDivRef = useRef(null);
     const groceriesScrollDivRef = useRef(null);
+    const restaurantScrollDivRef = useRef(null);
 
-    scrollDivRef.current.scrollBy({
-        left: -300,
-        behavior: "smooth"
-    });  //example code for scrolling
-    
-    const moveLeft = () => {
-        if (groceriesScrollDivRef.current) {
-            groceriesScrollDivRef.current.scrollBy({
-                left: -300,
-                behavior: "smooth"
-            });
-        }
-        if (foodItemScrollDivRef.current) {
-            foodItemScrollDivRef.current.scrollBy({
-                left: -300,
-                behavior: "smooth"
-            });
-        }
-    }
-    const moveRight = () => {
-        if (groceriesScrollDivRef.current) {
-            groceriesScrollDivRef.current.scrollBy({
-                left: 300,
-                behavior: "smooth"
-            });
-        }
-        if (foodItemScrollDivRef.current) {
+    // Food items
+    const scrollFoodLeft = () => foodItemScrollDivRef.current?.scrollBy({ left: -300, behavior: "smooth" })
+    const scrollFoodRight = () => foodItemScrollDivRef.current?.scrollBy({ left: 300, behavior: "smooth" });
 
-        }
+    // Groceries
+    const scrollGroceriesLeft = () => groceriesScrollDivRef.current?.scrollBy({ left: -300, behavior: "smooth" });
+    const scrollGroceriesRight = () => groceriesScrollDivRef.current?.scrollBy({ left: 300, behavior: "smooth" });
+
+    // Restaurants
+    const restaurantScrollDivLeft = () => restaurantScrollDivRef.current?.scrollBy({ left: -328, behavior: "smooth" });
+    const restaurantScrollDivRight = () => restaurantScrollDivRef.current?.scrollBy({ left: 328, behavior: "smooth" });
+
+    const handleScrollToAppDownload = (ref) => ref.current.scrollIntoView({ behavior: "smooth" });
+
+    const handleSidebarOpen = (ref) => {
+        const sidebarContainer = ref.current;
+
+        if(sidebarContainer.classList.contains("sidebarVisible")) return;
+
+        sidebarContainer.style.display = "block";
+        setTimeout(() => {
+            sidebarContainer.classList.add("sidebarVisible")
+        }, 100)
+
+        return;
+
     }
+    const handleSidebarClose = (ref) => {
+        const sidebarContainer = ref.current;
+
+        if(sidebarContainer.classList.contains("sidebarVisible")){
+            sidebarContainer.classList.remove("sidebarVisible");
+            setTimeout(() => {
+                sidebarContainer.style.display = "none";
+            }, 400);
+        }
+
+        return;
+    }
+
     return (
         <>
             <HelmetProvider>
@@ -62,11 +78,11 @@ function Home() {
                         Order Food & Groceries. Discover the best restaurants. Swiggy it!
                     </title>
                 </Helmet>
-                <main>
+                <main className="homeContainer">
                     <header>
                         <div className="homeHeaderCont align-center">
                             <div className="homeLogo-white center">
-                                <img width="100%" loading="lazy" src="/homePageAssets/homePageSwiggyLogo.png" alt="Swiggy..." />
+                                <Link to="/"><img width="100%" loading="lazy" src="/homePageAssets/homePageSwiggyLogo.png" alt="Swiggy..." /></Link>
                             </div>
                             <ul className="homeNavButtons align-center">
                                 <li>
@@ -75,13 +91,28 @@ function Home() {
                                 <li>
                                     <Link to="#">Partner with us</Link>
                                 </li>
-                                <li className="align-center">
-                                    <Link to="#">Get the App</Link>
+                                <li onClick={() => { handleScrollToAppDownload(getAppDivRef) }} className="align-center">
+                                    <Link>Get the App</Link>
                                     {homeSvgAssetsObject.gotoIcon}
                                 </li>
-                                <li>
+                                <li onClick={() => handleSidebarOpen(sidebarDivRef)}>
                                     <Link to="#">Sign in</Link>
                                 </li>
+                                <div ref={sidebarDivRef} className="sidebarContainer">
+                                    <div onClick={() => {handleSidebarClose(sidebarDivRef)}} className="sidebarBlackShade"></div>
+                                    <div className="sidebarDiv">
+                                        <div className="sidebar-login">
+                                            <header>
+                                                <button onClick={() => handleSidebarClose(sidebarDivRef)}></button>
+                                            </header>
+                                            <main className="sidebarForLogin">
+                                                <div className=""></div>
+                                            </main> 
+                                            {/* designs for sidebar is pending*/}
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {/* create a sidebar, toggle using sign in button and appears from right side of the screen */}
                             </ul>
                         </div>
@@ -122,33 +153,31 @@ function Home() {
                                 <header className="align-center">
                                     <p>Order our best food options</p>
                                     <div className="right-left-navigation align-center">
-                                        <button onClick={moveLeft} className="arrow-left center"><Arrow /></button>
-                                        <button onClick={moveRight} className="arrow-right center"><Arrow /></button>
+                                        <button onClick={scrollFoodLeft} className="arrow-left center"><Arrow /></button>
+                                        <button onClick={scrollFoodRight} className="arrow-right center"><Arrow /></button>
                                     </div>
                                 </header>
-                                <main>
-                                    <div ref={foodItemScrollDivRef} className="foodItemsCont">
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/bhature.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/biryani.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/burger.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/cake.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/coffee.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/dosa.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/gulab-jamun.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/ice-cream.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/khichdi.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/lassi.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/north-indian.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/parantha.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/pasta.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/pizza.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/rasgulle.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/rolls.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/salad.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/shake.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/tea.png`} alt="Loading..." /></Link>
-                                        <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/vada.png`} alt="Loading..." /></Link>
-                                    </div>
+                                <main ref={foodItemScrollDivRef}>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/bhature.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/biryani.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/burger.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/cake.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/coffee.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/dosa.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/gulab-jamun.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/ice-cream.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/khichdi.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/lassi.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/north-indian.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/parantha.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/pasta.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/pizza.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/rasgulle.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/rolls.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/salad.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/shake.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/tea.png`} alt="Loading..." /></Link>
+                                    <Link to="https://google.com"><img loading="lazy" src={`${foodItemPathPrefix}/vada.png`} alt="Loading..." /></Link>
                                 </main>
                             </div>
                         </div>
@@ -156,50 +185,163 @@ function Home() {
                             <header className="align-center">
                                 <p>Shop groceries on Instamart</p>
                                 <div className="right-left-navigation align-center">
-                                    <button onClick={moveLeft} className="arrow-left center"><Arrow /></button>
-                                    <button onClick={moveRight} className="arrow-right center"><Arrow /></button>
+                                    <button onClick={scrollGroceriesLeft} className="arrow-left center"><Arrow /></button>
+                                    <button onClick={scrollGroceriesRight} className="arrow-right center"><Arrow /></button>
                                 </div>
                             </header>
                             <main ref={groceriesScrollDivRef} className="flex">
-                                <GroceryTile groceryTileName="Fresh Vegetables" groceryTileSrc={`${groceryTilePathPrefix}/grocery101.png`} />
-                                <GroceryTile groceryTileName="Fresh Fruits" groceryTileSrc={`${groceryTilePathPrefix}/grocery102.png`} />
-                                <GroceryTile groceryTileName="Dairy, Bread and Eggs" groceryTileSrc={`${groceryTilePathPrefix}/grocery103.png`} />
-                                <GroceryTile groceryTileName="Rice, Atta and Dals" groceryTileSrc={`${groceryTilePathPrefix}/grocery104.png`} />
-                                <GroceryTile groceryTileName="Masalas and Dry Fruits" groceryTileSrc={`${groceryTilePathPrefix}/grocery105.png`} />
-                                <GroceryTile groceryTileName="Oils and Ghee" groceryTileSrc={`${groceryTilePathPrefix}/grocery106.png`} />
-                                <GroceryTile groceryTileName="Munchies" groceryTileSrc={`${groceryTilePathPrefix}/grocery107.png`} />
-                                <GroceryTile groceryTileName="Sweet Tooth" groceryTileSrc={`${groceryTilePathPrefix}/grocery108.png`} />
-                                <GroceryTile groceryTileName="Cold Drinks and Juices" groceryTileSrc={`${groceryTilePathPrefix}/grocery109.png`} />
-                                <GroceryTile groceryTileName="Biscuits and Cakes" groceryTileSrc={`${groceryTilePathPrefix}/grocery110.png`} />
-                                <GroceryTile groceryTileName="Instant and Frozen Food" groceryTileSrc={`${groceryTilePathPrefix}/grocery111.png`} />
-                                <GroceryTile groceryTileName="Meat and Seafood" groceryTileSrc={`${groceryTilePathPrefix}/grocery112.png`} />
-                                <GroceryTile groceryTileName="Cereals and Breakfast" groceryTileSrc={`${groceryTilePathPrefix}/grocery113.png`} />
-                                <GroceryTile groceryTileName="Sauces and Spreads" groceryTileSrc={`${groceryTilePathPrefix}/grocery114.png`} />
-                                <GroceryTile groceryTileName="Tea, Coffee and More" groceryTileSrc={`${groceryTilePathPrefix}/grocery115.png`} />
-                                <GroceryTile groceryTileName="Cleaning Essentials" groceryTileSrc={`${groceryTilePathPrefix}/grocery116.png`} />
-                                <GroceryTile groceryTileName="Pharma and Hygiene" groceryTileSrc={`${groceryTilePathPrefix}/grocery117.png`} />
-                                <GroceryTile groceryTileName="Bath, Body and Hair" groceryTileSrc={`${groceryTilePathPrefix}/grocery118.png`} />
-                                <GroceryTile groceryTileName="Paan Corner" groceryTileSrc={`${groceryTilePathPrefix}/grocery119.png`} />
-                                <GroceryTile groceryTileName="Home and Kitchen" groceryTileSrc={`${groceryTilePathPrefix}/grocery120.png`} />
-                                <GroceryTile groceryTileName="Office and Electricals" groceryTileSrc={`${groceryTilePathPrefix}/grocery121.png`} />
-                                <GroceryTile groceryTileName="Baby Care" groceryTileSrc={`${groceryTilePathPrefix}/grocery122.png`} />
-                                <GroceryTile groceryTileName="Pet Supplies" groceryTileSrc={`${groceryTilePathPrefix}/grocery123.png`} />
-                                <GroceryTile groceryTileName="Beauty and Grooming" groceryTileSrc={`${groceryTilePathPrefix}/grocery124.png`} />
+                                <Link to="#"><GroceryTile groceryTileName="Fresh Vegetables" groceryTileSrc={`${groceryTilePathPrefix}/grocery101.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Fresh Fruits" groceryTileSrc={`${groceryTilePathPrefix}/grocery102.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Dairy, Bread and Eggs" groceryTileSrc={`${groceryTilePathPrefix}/grocery103.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Rice, Atta and Dals" groceryTileSrc={`${groceryTilePathPrefix}/grocery104.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Masalas and Dry Fruits" groceryTileSrc={`${groceryTilePathPrefix}/grocery105.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Oils and Ghee" groceryTileSrc={`${groceryTilePathPrefix}/grocery106.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Munchies" groceryTileSrc={`${groceryTilePathPrefix}/grocery107.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Sweet Tooth" groceryTileSrc={`${groceryTilePathPrefix}/grocery108.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Cold Drinks and Juices" groceryTileSrc={`${groceryTilePathPrefix}/grocery109.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Biscuits and Cakes" groceryTileSrc={`${groceryTilePathPrefix}/grocery110.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Instant and Frozen Food" groceryTileSrc={`${groceryTilePathPrefix}/grocery111.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Meat and Seafood" groceryTileSrc={`${groceryTilePathPrefix}/grocery112.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Cereals and Breakfast" groceryTileSrc={`${groceryTilePathPrefix}/grocery113.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Sauces and Spreads" groceryTileSrc={`${groceryTilePathPrefix}/grocery114.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Tea, Coffee and More" groceryTileSrc={`${groceryTilePathPrefix}/grocery115.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Cleaning Essentials" groceryTileSrc={`${groceryTilePathPrefix}/grocery116.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Pharma and Hygiene" groceryTileSrc={`${groceryTilePathPrefix}/grocery117.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Bath, Body and Hair" groceryTileSrc={`${groceryTilePathPrefix}/grocery118.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Paan Corner" groceryTileSrc={`${groceryTilePathPrefix}/grocery119.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Home and Kitchen" groceryTileSrc={`${groceryTilePathPrefix}/grocery120.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Office and Electricals" groceryTileSrc={`${groceryTilePathPrefix}/grocery121.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Baby Care" groceryTileSrc={`${groceryTilePathPrefix}/grocery122.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Pet Supplies" groceryTileSrc={`${groceryTilePathPrefix}/grocery123.png`} /></Link>
+                                <Link to="#"><GroceryTile groceryTileName="Beauty and Grooming" groceryTileSrc={`${groceryTilePathPrefix}/grocery124.png`} /></Link>
                             </main>
                         </div>
                         <div className="restaurantDisplay center flex-direction-C">
                             <header className="align-center">
                                 <p>Discover best restaurants on Dineout</p>
                                 <div className="right-left-navigation align-center">
-                                    <button className="arrow-left center"><Arrow /></button>
-                                    <button className="arrow-right center"><Arrow /></button>
+                                    <button onClick={restaurantScrollDivLeft} className="arrow-left center"><Arrow /></button>
+                                    <button onClick={restaurantScrollDivRight} className="arrow-right center"><Arrow /></button>
                                 </div>
                             </header>
-                            <main className="flex">
-                                <RestaurantCard />
+                            <main ref={restaurantScrollDivRef} className="flex">
+                                <Link to="#"><RestaurantCard
+                                    restaurantImageURL={`${restaurantImagePathPrefix}/restaurant (5).jpg`}
+                                    restaurantName="The Lama"
+                                    rating="4.2"
+                                    origin="Asian"
+                                    foodType=""
+                                    price="₹800 for two"
+                                    address="C Scheme, Jaipur"
+                                    distanceFromUser="2Km"
+                                    tableBooking={true}
+                                    freeDrink={false}
+                                    isPreBookingDiscountIncluded={true}
+                                    preBookingDiscount="10"
+                                /></Link>
+                                <Link to="#"><RestaurantCard
+                                    restaurantImageURL={`${restaurantImagePathPrefix}/restaurant (1).jpg`}
+                                    restaurantName="Aralia Cafe and Restroomsdsdsdsd"
+                                    rating="4.5"
+                                    origin="North Indian"
+                                    foodType="Asian"
+                                    price="₹1500 for two"
+                                    address="C Scheme, Jaipur"
+                                    distanceFromUser="1.2Km"
+                                    tableBooking={true}
+                                    freeDrink={true}
+                                    isPreBookingDiscountIncluded={true}
+                                    preBookingDiscount="23"
+                                /></Link>
+                                <Link to="#"><RestaurantCard
+                                    restaurantImageURL={`${restaurantImagePathPrefix}/restaurant (1).jpg`}
+                                    restaurantName="Aralia Cafe and Restroomsdsdsdsd"
+                                    rating="4.5"
+                                    origin="North Indian"
+                                    foodType="Asian"
+                                    price="₹1500 for two"
+                                    address="C Scheme, Jaipur"
+                                    distanceFromUser="1.2Km"
+                                    tableBooking={true}
+                                    freeDrink={true}
+                                    isPreBookingDiscountIncluded={true}
+                                    preBookingDiscount="23"
+                                /></Link>
+                                <Link to="#"><RestaurantCard
+                                    restaurantImageURL={`${restaurantImagePathPrefix}/restaurant (1).jpg`}
+                                    restaurantName="Aralia Cafe and Restroomsdsdsdsd"
+                                    rating="4.5"
+                                    origin="North Indian"
+                                    foodType="Asian"
+                                    price="₹1500 for two"
+                                    address="C Scheme, Jaipur"
+                                    distanceFromUser="1.2Km"
+                                    tableBooking={true}
+                                    freeDrink={true}
+                                    isPreBookingDiscountIncluded={true}
+                                    preBookingDiscount="23"
+                                /></Link>
+                                <Link to="#"><RestaurantCard
+                                    restaurantImageURL={`${restaurantImagePathPrefix}/restaurant (1).jpg`}
+                                    restaurantName="Aralia Cafe and Restroomsdsdsdsd"
+                                    rating="4.5"
+                                    origin="North Indian"
+                                    foodType="Asian"
+                                    price="₹1500 for two"
+                                    address="C Scheme, Jaipur"
+                                    distanceFromUser="1.2Km"
+                                    tableBooking={true}
+                                    freeDrink={true}
+                                    isPreBookingDiscountIncluded={true}
+                                    preBookingDiscount="23"
+                                /></Link>
                             </main>
                         </div>
+                        <div ref={getAppDivRef} className="appDownloadImageDiv">
+                            <img src="/homePageAssets/App_download_banner.png" alt="Loading..." />
+                        </div>
+                        <div className="foodDeliveryCities center">
+                            <div className="foodDeliveryCitiesDiv">
+                                <header>Cities with food delivery</header>
+                                <main className="flex">
+                                    <Link className="justify-center"><p>Order food online in Bangalore</p></Link>
+                                    <Link className="justify-center"><p>Order food online in Gurgaon</p></Link>
+                                    <Link className="justify-center"><p>Order food online in Chandigarh</p></Link>
+                                    <Link className="justify-center"><p>Order food online in Panchkula</p></Link>
+                                    <Link className="justify-center"><p>Order food online in Yamunanagar</p></Link>
+                                    <Link className="justify-center"><p>Order food online in Kurukshetra</p></Link>
+                                    <Link className="justify-center"><p>Order food online in Karnal</p></Link>
+                                    <Link className="justify-center"><p>Order food online in Rohtak</p></Link>
+                                    <Link className="justify-center"><p>Order food online in Bhiwani</p></Link>
+                                    <Link className="justify-center"><p>Order food online in Delhi</p></Link>
+                                    <Link className="justify-center"><p>Order food online in Kolhapur</p></Link>
+                                    <Link className="justify-center"><p>Order food online in Nashik</p></Link>
+                                </main>
+                            </div>
+                        </div>
+                        <div className="groceryDeliveryCities center">
+                            <div className="groceryDeliveryCitiesDiv">
+                                <header>Cities with Grocery delivery</header>
+                                <main className="flex">
+                                    <Link className="justify-center"><p>Order grocery online in Bangalore</p></Link>
+                                    <Link className="justify-center"><p>Order grocery online in Gurgaon</p></Link>
+                                    <Link className="justify-center"><p>Order grocery online in Chandigarh</p></Link>
+                                    <Link className="justify-center"><p>Order grocery online in Panchkula</p></Link>
+                                    <Link className="justify-center"><p>Order grocery online in Yamunanagar</p></Link>
+                                    <Link className="justify-center"><p>Order grocery online in Kurukshetra</p></Link>
+                                    <Link className="justify-center"><p>Order grocery online in Karnal</p></Link>
+                                    <Link className="justify-center"><p>Order grocery online in Rohtak</p></Link>
+                                    <Link className="justify-center"><p>Order grocery online in Bhiwani</p></Link>
+                                    <Link className="justify-center"><p>Order grocery online in Delhi</p></Link>
+                                    <Link className="justify-center"><p>Order grocery online in Kolhapur</p></Link>
+                                    <Link className="justify-center"><p>Order grocery online in Nashik</p></Link>
+                                </main>
+                            </div>
+                        </div>
                     </main>
+                    <footer>
+                        <div className=""></div>
+                    </footer>
                 </main>
             </HelmetProvider>
         </>
