@@ -1,32 +1,33 @@
 import "./Home.css";
-import "../../css/utilityClasses.css";
+import "../../../css/utilityClasses.css";
 
 import Arrow from "../Arrow/Arrow.jsx";
 import GroceryTile from "../GroceryTile/GroceryTile.jsx";
 import RestaurantCard from "../RestaurantCard/RestaurantCard.jsx";
 import homeSvgAssetsObject from "./home.svgAssetsExporter.jsx";
 
+import axios from "axios"
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { Link } from "react-router-dom";
-import { useRef } from "react";
-
-
-// Todoes ->
-/*
-1. create this restaurant register page ,but first finish the home page design
-*/
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
 function Home() {
+    const navigate = useNavigate();
+
+    //useState Hooks()
+    let [initialRender, setInitialRender] = useState(false)
+
     // global variables
     const foodItemPathPrefix = "/homePageAssets/foodItems";
     const groceryTilePathPrefix = "/homePageAssets/groceryTileImages";
     const restaurantImagePathPrefix = "/homePageAssets/restaurants"
 
     //Div references
-    // const 
-    const sidebarDivRef = useRef(null);
+    const chevronRef = useRef(null);
     const getAppDivRef = useRef(null);
+    const sidebarDivRef = useRef(null);
     const foodItemScrollDivRef = useRef(null);
+    const locationDropDownRef = useRef(null);
     const groceriesScrollDivRef = useRef(null);
     const restaurantScrollDivRef = useRef(null);
 
@@ -42,14 +43,39 @@ function Home() {
     const restaurantScrollDivLeft = () => restaurantScrollDivRef.current?.scrollBy({ left: -328, behavior: "smooth" });
     const restaurantScrollDivRight = () => restaurantScrollDivRef.current?.scrollBy({ left: 328, behavior: "smooth" });
 
+    // Other animation controller
     const handleScrollToAppDownload = (ref) => ref.current.scrollIntoView({ behavior: "smooth" });
+    const handleSearchLocationBoxDropdown = (ref) => {
+        const locationDropDown = ref.current;
+        const chevronButton = chevronRef.current;
 
+        if (
+            chevronButton.classList.contains("chev-up") &&
+            locationDropDown.classList.contains("locationDropDown-opened")
+        ) {
+
+            chevronButton.classList.remove("chev-up");
+            locationDropDown.classList.remove("locationDropDown-opened");
+            setTimeout(() => {
+                locationDropDown.style.display = "none";
+            }, 500)
+
+        } else {
+
+            locationDropDown.style.display = "flex";
+            setTimeout(() => {
+                chevronButton.classList.add("chev-up");
+                locationDropDown.classList.add("locationDropDown-opened");
+            }, 50)
+        }
+    }
     const handleSidebarOpen = (ref) => {
         const sidebarContainer = ref.current;
 
-        if(sidebarContainer.classList.contains("sidebarVisible")) return;
+        if (sidebarContainer.classList.contains("sidebarVisible")) return;
 
         sidebarContainer.style.display = "block";
+        document.body.style.overflow = "hidden";
         setTimeout(() => {
             sidebarContainer.classList.add("sidebarVisible")
         }, 100)
@@ -60,8 +86,10 @@ function Home() {
     const handleSidebarClose = (ref) => {
         const sidebarContainer = ref.current;
 
-        if(sidebarContainer.classList.contains("sidebarVisible")){
+        if (sidebarContainer.classList.contains("sidebarVisible")) {
             sidebarContainer.classList.remove("sidebarVisible");
+            document.body.style.overflowY = "auto";
+            document.body.style.overflowX = "hidden";
             setTimeout(() => {
                 sidebarContainer.style.display = "none";
             }, 400);
@@ -69,6 +97,27 @@ function Home() {
 
         return;
     }
+
+    useEffect(() => {
+        let isMounted = true;
+
+        const fetchResources = async () => {
+            try {
+                const response = await axios.get("http://localhost:8000");
+                if (isMounted) {
+                    console.log(response); // only update if still mounted
+                }
+            } catch (error) {
+                if (isMounted) console.log(error);
+            }
+        };
+
+        fetchResources();
+
+        return () => {
+            isMounted = false;
+        };
+    }, [])
 
     return (
         <>
@@ -99,7 +148,7 @@ function Home() {
                                     <Link to="#">Sign in</Link>
                                 </li>
                                 <div ref={sidebarDivRef} className="sidebarContainer">
-                                    <div onClick={() => {handleSidebarClose(sidebarDivRef)}} className="sidebarBlackShade"></div>
+                                    <div onClick={() => { handleSidebarClose(sidebarDivRef) }} className="sidebarBlackShade"></div>
                                     <div className="sidebarDiv">
                                         <div className="sidebar-login">
                                             <header>
@@ -107,13 +156,11 @@ function Home() {
                                             </header>
                                             <main className="sidebarForLogin">
                                                 <div className=""></div>
-                                            </main> 
+                                            </main>
                                             {/* designs for sidebar is pending*/}
                                         </div>
                                     </div>
                                 </div>
-
-                                {/* create a sidebar, toggle using sign in button and appears from right side of the screen */}
                             </ul>
                         </div>
                     </header>
@@ -128,11 +175,29 @@ function Home() {
                                 <div className="locationSearch align-center">
                                     {homeSvgAssetsObject.orangeLocationSymbol}
                                     <input type="text" placeholder="Enter your delivery location" />
-                                    {homeSvgAssetsObject.chevron}
+                                    <button ref={chevronRef} onClick={() => handleSearchLocationBoxDropdown(locationDropDownRef)} className="chevron-button center">{homeSvgAssetsObject.chevron}</button>
                                 </div>
-                                {/* <div className="locationDropDown"></div> <-- PENDING*/}
+                                <div ref={locationDropDownRef} className="locationDropDown flex-direction-C">
+                                    <header className="align-center">
+                                        {homeSvgAssetsObject.northEastSidedOrangeArrow}
+                                        <button>Use my current location</button>
+                                    </header>
+                                    <main>
+                                        <header>search result</header>
+                                        <ul className="locationSuggestionsList">
+                                            <li className="locationSuggestion align-center">
+                                                {homeSvgAssetsObject.northEastSidedGrayArrow}
+                                                <p><Link>SDSD & ASSOCIATES, Unnamed Road, Hedgewar Nagar, Civil Lines, Rewa, Madhya Pradesh, India</Link></p>
+                                            </li>
+                                            {/* more search suggestions here, loaded by JSX */}
+                                        </ul>
+                                    </main>
+                                </div>
                                 <div className="restaurantSearch align-center">
-                                    <input type="text" placeholder="Search for restaurants, item or more" />
+                                    <input
+                                        onFocus={() => navigate("/search")}
+                                        type="text"
+                                        placeholder="Search for restaurants, item or more" />
                                     {homeSvgAssetsObject.homeSearchIcon}
                                 </div>
                             </div>

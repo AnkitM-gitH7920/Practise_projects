@@ -1,5 +1,5 @@
 import "./RestaurantCard.css";
-import "../../css/utilityClasses.css";
+import "../../../css/utilityClasses.css";
 import homeSvgAssetsObject from "../Home/home.svgAssetsExporter.jsx";
 
 // props:-

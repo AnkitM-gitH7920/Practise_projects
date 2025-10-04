@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./components/Home/Home.jsx"
-import RegisterRestaurant from "./components/registerRestaurant/RegisterRestaurant.jsx";
+import Home from "./components/home-page/Home/Home.jsx"
+import RegisterRestaurant from "./components/register-restaurant/RegisterRestaurant/RegisterRestaurant.jsx";
+import SearchPage from "./components/SearchPage/SearchPage/SearchPage.jsx";
 
 function App() {
     const router = createBrowserRouter([
@@ -9,8 +10,12 @@ function App() {
             element: <Home />
         },
         {
-            path: "register-restaurant",
+            path: "/register-restaurant",
             element: <RegisterRestaurant />
+        },
+        {
+            path: "/search",
+            element: <SearchPage />
         }
     ])
 

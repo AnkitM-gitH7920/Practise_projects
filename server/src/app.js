@@ -20,7 +20,7 @@ app.use(cors({
 app.use(express.static("public"));
 app.use(express.json({ limit: "30kb" }));
 
-import router from "./routes/practise.route.js";
-app.use("/api", router)
+import homePageRouter from "./routes/homePageResourceProvider.route.js";
+app.use(homePageRouter)
 
 export default app;

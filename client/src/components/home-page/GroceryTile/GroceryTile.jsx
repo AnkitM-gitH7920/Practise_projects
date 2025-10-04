@@ -1,5 +1,5 @@
 import "./GroceryTile.css";
-import "../../css/utilityClasses.css";
+import "../../../css/utilityClasses.css";
 
 function GroceryTile(props){
     return(

@@ -1,5 +1,5 @@
 import "./Arrow.css";
-import "../../css/utilityClasses.css"
+import "../../../css/utilityClasses.css";
 
 function Arrow(){
     return (
