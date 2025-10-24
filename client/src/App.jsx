@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./components/home-page/Home/Home.jsx"
+import Home from "./components/home-page/Home/Home.jsx";
 import RegisterRestaurant from "./components/register-restaurant/RegisterRestaurant/RegisterRestaurant.jsx";
 import SearchPage from "./components/SearchPage/SearchPage/SearchPage.jsx";
 
@@ -7,23 +7,19 @@ function App() {
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Home />
+            element: <Home />,
         },
         {
             path: "/register-restaurant",
-            element: <RegisterRestaurant />
+            element: <RegisterRestaurant />,
         },
         {
             path: "/search",
-            element: <SearchPage />
-        }
-    ])
-
-    return (
-        <>
-            <RouterProvider router={router} />
-            <div className="flex"></div>
-        </>
-    )
+            element: <SearchPage />,
+        },
+    ]);
+    
+    return <RouterProvider router={router} />;
 }
+
 export default App;

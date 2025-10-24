@@ -4,7 +4,7 @@ const DATABASE_NAME = process.env.DATABASE_NAME;
 
 async function connectDB(){
     try {
-        const connnectionInstance = await mongoose.connect(`mongodb://127.0.0.1:27017/${DATABASE_NAME}`)
+        const connnectionInstance = await mongoose.connect(`mongodb+srv://ankitmehra7920:ankitmehramongodb1234@cluster0.42eas6o.mongodb.net/users`)
         console.log("DB connection success !! PORT :", connnectionInstance.connection.port)
     } catch (error) {
         console.log("Error connecting to database")

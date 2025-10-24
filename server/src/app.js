@@ -21,6 +21,9 @@ app.use(express.static("public"));
 app.use(express.json({ limit: "30kb" }));
 
 import homePageRouter from "./routes/homePageResourceProvider.route.js";
-app.use(homePageRouter)
+import authRouter from "./routes/auth.routes.js";
+
+app.use("/api/v1", homePageRouter);
+app.use("/api/v1/auth", authRouter);
 
 export default app;

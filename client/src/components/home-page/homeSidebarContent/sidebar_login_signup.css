@@ -1,0 +1,161 @@
+.sidebarLoginSignupContainer>* {
+    font-family: "poppins";
+}
+
+.sidebarLoginSignupContainer>header>div:first-child {
+    position: absolute;
+    top: 35px;
+    left: 35px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.sidebarLoginSignupContainer>header>main>p {
+    font-size: 1.9rem;
+    font-weight: 600;
+    margin: 55px 0px 8px 0px;
+}
+
+.sidebarLoginSignupContainer>header>main {
+    position: relative;
+    margin: 20px 0px;
+}
+
+.sidebarLoginSignupContainer>header>main::before {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 0px;
+    height: 2px;
+    width: 30px;
+    background-color: black;
+
+}
+
+.sidebarLoginSignupContainer>header>main>span {
+    padding: 10px 0px;
+}
+
+.sidebarLoginSignupContainer>header>main>span,
+.sidebarLoginSignupContainer>header>main>span>button {
+    font-size: 0.8rem;
+    font-weight: 600;
+
+}
+
+#createAccountBtn,
+#loginToYourAccBtn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    color: var(--home-orange-1);
+}
+
+.sidebarLoginSignupContainer>header>main>img {
+    height: 7rem;
+    width: 7rem;
+    position: absolute;
+    right: 25px;
+    top: -19px;
+}
+
+/* main bottom container designs */
+.sidebarLoginSignupContainer>main {
+    width: 92%;
+    height: fit-content;
+    margin-top: 70px;
+}
+
+/* phone number input designs */
+.login-phone-inputDiv {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+}
+
+.inputFieldDesigns {
+    font-weight: 600;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 40px 20px 12px 20px;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+.wrongInputWarningText {
+    display: none;
+    position: absolute;
+    top: -20px;
+    left: 0px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #fa4a5b;
+}
+
+.input-divs>input::-webkit-outer-spin-button,
+.input-divs>input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.referalCodeDisplayBtn {
+    background-color: transparent;
+    border: none;
+    color: #5d8ed5;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+/* continue button design */
+#sidebarContinueBtn {
+    background-color: var(--home-orange-1);
+    color: #ffffff;
+    width: 100%;
+    padding: 15px 16px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.termsAndConditionsRedirect {
+    font-size: 0.74rem;
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 15px;
+    text-align: left;
+    font-weight: 700;
+}
+
+.termsAndConditionsRedirect>a {
+    color: black;
+}
+
+/* utility classes */
+.input-divs {
+    position: relative;
+}
+
+.wrongInputField {
+    box-shadow: 0px 0px 3px 1px red !important;
+}
+/* 
+.signupInputFieldLabel {
+    position: absolute;
+    left: 28px;
+    top: 28px;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.inputFieldDesigns:focus+label {
+    transform: translate(-9px, -10px);
+    font-weight: 700;
+    font-size: 0.73rem;
+    color: rgba(2, 6, 12, .5);
+} */

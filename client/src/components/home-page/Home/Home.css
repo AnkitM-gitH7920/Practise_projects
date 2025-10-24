@@ -18,7 +18,9 @@
     gap: 30px;
 }
 
+.homeNavButtons li,
 .homeNavButtons li a {
+    cursor: pointer;
     text-decoration: none;
     color: white;
     font-family: poppins;
@@ -121,7 +123,7 @@
     left: 10px;
 }
 
-.chevron-button{
+.chevron-button {
     background-color: transparent;
     border: none;
     outline: none;
@@ -134,7 +136,8 @@
     transition: transform 0.2s linear;
 
 }
-.chev-up{
+
+.chev-up {
     transform: rotate(0);
     bottom: 15px;
     transition: transform 0.3s linear;
@@ -145,7 +148,7 @@
 }
 
 /* location dropdown positioning and designs */
-.locationDropDown{
+.locationDropDown {
     position: absolute;
     right: 0;
     top: 70px;
@@ -162,14 +165,17 @@
     transform-origin: top;
 
 }
-.locationSuggestionsList li{
+
+.locationSuggestionsList li {
     gap: 10px;
 }
-.locationSuggestionsList li a{
+
+.locationSuggestionsList li a {
     color: #0000008c;
     transition: all 0.4s;
 }
-.locationSuggestionsList li p{
+
+.locationSuggestionsList li p {
     font-family: "poppins";
     font-size: 1.125rem;
     overflow: hidden;
@@ -181,18 +187,22 @@
     text-overflow: ellipsis;
     margin: 5px 0px;
 }
-.locationSuggestionsList li a:hover{
+
+.locationSuggestionsList li a:hover {
     color: var(--home-orange-1);
 }
-.locationDropDown-opened{
+
+.locationDropDown-opened {
     height: fit-content;
     transform: translateY(0px);
     opacity: 1;
 }
-.locationDropDown header{
+
+.locationDropDown header {
     gap: 20px;
 }
-.locationDropDown header button{
+
+.locationDropDown header button {
     font-family: "poppins";
     background-color: transparent;
     border: none;
@@ -202,15 +212,18 @@
     color: var(--home-orange-1);
     cursor: pointer;
 }
-.locationDropDown main{
-    display: block;  /* trigger display block after clicking (Use my current location) / when user tries to search a location */
+
+.locationDropDown main {
+    display: block;
+    /* trigger display block after clicking (Use my current location) / when user tries to search a location */
     position: relative;
     margin: 30px 0px 0px 0px;
     padding: 20px 0px;
     overflow-x: hidden;
     overflow-y: auto;
 }
-.locationDropDown main::before{
+
+.locationDropDown main::before {
     content: "";
     position: absolute;
     left: 0;
@@ -219,17 +232,20 @@
     height: 1.5px;
     background-color: rgba(0, 0, 0, 0.3);
 }
-.locationDropDown main::-webkit-scrollbar{
+
+.locationDropDown main::-webkit-scrollbar {
     width: 4px;
     background-color: white;
     border-radius: 90px;
 }
-.locationDropDown main::-webkit-scrollbar-thumb{
+
+.locationDropDown main::-webkit-scrollbar-thumb {
     width: 4px;
     border-radius: 90px;
     background-color: rgba(0, 0, 0, 0.7);
 }
-.locationDropDown main header{
+
+.locationDropDown main header {
     font-family: "poppins";
     font-size: 1.19rem;
     letter-spacing: 1px;
@@ -239,6 +255,7 @@
     font-weight: 600;
 
 }
+
 /* positions and resizing redirecting cards */
 .redirectingCardImageContainer {
     margin: 25px 0px 0px 0px;
@@ -441,7 +458,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 1000;
-    transition: all 0.4s;
+    transition: all 0.2s;
 }
 
 .sidebarBlackShade {
@@ -452,7 +469,7 @@
     opacity: 0;
     height: 100%;
     width: 100%;
-    transition: all 0.4s;
+    transition: all 0.2s;
 }
 
 .sidebarDiv {
@@ -463,32 +480,17 @@
     height: 100%;
     width: 475px;
     background-color: white;
-    transition: all 0.4s;
-}
-
-.sidebarDiv header button {
-    background-color: white;
-    outline: none;
-    border: none;
-    cursor: pointer;
-}
-
-.sidebarDiv header button::before {
-    content: "✕";
-    font-size: 1.5rem;
-    color: rgba(2, 6, 12, .8);
-    background: none;
-    border-radius: 90px;
-    border: none;
+    transition: all 0.2s;
+    padding: 40px;
 }
 
 .sidebarContainer.sidebarVisible .sidebarBlackShade {
     background-color: #02060c;
     opacity: 0.7;
-    transition: all 0.4s;
+    transition: all 0.2s;
 }
 
 .sidebarContainer.sidebarVisible .sidebarDiv {
     right: 0;
-    transition: all 0.4s;
+    transition: all 0.3s;
 }

@@ -1,0 +1,81 @@
+.rrc-top {
+    position: relative;
+    height: 330px;
+    width: 100%;
+    overflow: hidden;
+
+}
+
+.partnerBG {
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+}
+
+.partnerBG img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.rrc-top-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* top div designs for elements */
+
+.rrc-top-content-left>* {
+    color: white;
+    font-family: "poppins";
+}
+
+.partnerTitleWithOrangenUnderline {
+    margin: 15px 0px;
+}
+
+.partnerTitleWithOrangenUnderline p {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    line-height: 0px;
+}
+
+.changingDetailText {
+    position: relative;
+}
+
+.changingDetailText p {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 40px;
+    width: 400px;
+    text-wrap: wrap;
+    white-space: normal;
+}
+
+.slidingIndicator {
+    position: absolute;
+    bottom: -20px;
+    left: 0px;
+    width: 90px;
+    overflow: hidden;
+    height: 5px;
+    border-radius: 90px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.whiteIndicator {
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    border-radius: 90px;
+    background-color: white;
+    transition: left 0.3s;
+}
+
+/* designs for the restaurant id form */
